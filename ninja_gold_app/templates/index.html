@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="top">
+        <p>Your Gold: </p>
+        {{request.session.goldsum}}
+    </div>
+    
+    <div class="middle">
+        <div class="block" id="farm">
+            <h2>Farm</h2>
+            <p>(earns 10-20 golds)</p>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="farm">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+        <div class="block" id="cave">
+            <h2>Cave</h2>
+            <p>(earns 5-10 golds)</p>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="cave">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+        <div class="block" id="house">
+            <h2>House</h2>
+            <p>(earns 2-5 golds)</p>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="house">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+        <div class="block" id="casino">
+            <h2>Casino</h2>
+            <p>(earns/takes 0-50 golds)</p>
+            <form action="/process" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="location" value="casino">
+                <button>Find Gold!</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <p>Activities</p>
+        {% for activity in request.session.activity_log reversed %}
+            <p>{{activity}}</p>
+        {% endfor %}
+
+    </div>
+</body>
+</html>
+
+
+
